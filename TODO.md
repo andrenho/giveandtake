@@ -1,4 +1,4 @@
-Backend: Java / Spring
+== Backend: Java / Spring
 
 - define data structure (ok)
 - create spring boot project (ok)
@@ -12,12 +12,14 @@ Backend: Java / Spring
   - user login
 - complement info
 
-Frontend: React
+== Frontend: React
 
 - create website
 
-AWS
+== AWS
 
+- create Jenkins
+- create billing alerts
 - create domain
 - create database
 - create backend services `api.*`
@@ -25,3 +27,10 @@ AWS
   - secure backend
 - create frontend
   - secure frontend
+- lambdas?
+
+== Structure
+
+- users
+- products
+  - interaction
