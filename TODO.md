@@ -18,6 +18,8 @@ Frontend: React
 
 AWS
 
+- create Jenkins
+- create billing alerts
 - create domain
 - create database
 - create backend services `api.*`
@@ -25,3 +27,4 @@ AWS
   - secure backend
 - create frontend
   - secure frontend
+- lambdas?
