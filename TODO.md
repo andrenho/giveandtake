@@ -1,9 +1,9 @@
 Backend: Java / Spring
 
-- define data structure
-- create spring boot project
-  - add maven
-- create mvc basic structure
+- define data structure (ok)
+- create spring boot project (ok)
+  - add gradle (ok)
+- create mvc basic structure (ok)
 - add tests using JUnit and mockito
 - create database
 - add data objects using hibernate
