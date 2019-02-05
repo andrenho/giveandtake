@@ -45,7 +45,7 @@ wget http://localhost:8080/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin Git
 java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin workflow-aggregator
 java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin pipeline-multibranch-defaults
-java -jar jenkins-cli.jar -s http://localhost:8080/ create-job /tmp/giveandtake.xml 
+java -jar jenkins-cli.jar -s http://localhost:8080/ create-job giveandtake < /tmp/giveandtake.xml 
 
 service jenkins stop
 echo 'JENKINS_ARGS="--argumentsRealm.passwd.admin=p1a2s3s4 --argumentsRealm.roles.admin=admin"' >> /etc/sysconfig/jenkins
