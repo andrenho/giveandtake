@@ -29,6 +29,7 @@ terraform init
 terraform apply -var "access_key=$1" -var "secret_key=$2"
 
 echo
-echo "Connect to ssh with: ssh -i jenkins_aws.pem ec2-user@PUBLIC_IP"
+echo "Connect to ssh with: ssh -i jenkins_aws.pem ec2-user@`cat public_ip.txt`"
+echo "Jenkins available at http://`cat public_ip.txt`:8080"
 
 # vim:ts=4:sw=4:sts=4:expandtab

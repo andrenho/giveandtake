@@ -39,4 +39,11 @@ mv /tmp/jenkins /etc/sysconfig/jenkins
 chmod +x /tmp/install-plugins.sh
 bash /tmp/install-plugins.sh
 
+echo 'JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"' >> /etc/sysconfig/jenkins
+
+echo "Start Jenkins"
 service jenkins start
+
+echo "Install plugins & configure"
+wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin Git
