@@ -18,26 +18,21 @@ rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 yum install -y jenkins
 chkconfig jenkins on
 
-echo "Install Docker engine"
-yum install docker -y
-usermod -aG docker ec2-user
-service docker start
-
 echo "Install git"
 yum install -y git
 
 echo "Configure Jenkins"
-mkdir -p /var/lib/jenkins/init.groovy.d
-mv /tmp/basic-security.groovy /var/lib/jenkins/init.groovy.d/basic-security.groovy
-mv /tmp/disable-cli.groovy /var/lib/jenkins/init.groovy.d/disable-cli.groovy
-mv /tmp/csrf-protection.groovy /var/lib/jenkins/init.groovy.d/csrf-protection.groovy
-mv /tmp/disable-jnlp.groovy /var/lib/jenkins/init.groovy.d/disable-jnlp.groovy
-mv /tmp/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.UpgradeWizard.state
-mv /tmp/node-agent.groovy /var/lib/jenkins/init.groovy.d/node-agent.groovy
-chown -R jenkins:jenkins /var/lib/jenkins/jenkins.install.UpgradeWizard.state
-mv /tmp/jenkins /etc/sysconfig/jenkins
-chmod +x /tmp/install-plugins.sh
-bash /tmp/install-plugins.sh
+#mkdir -p /var/lib/jenkins/init.groovy.d
+#mv /tmp/basic-security.groovy /var/lib/jenkins/init.groovy.d/basic-security.groovy
+#mv /tmp/disable-cli.groovy /var/lib/jenkins/init.groovy.d/disable-cli.groovy
+#mv /tmp/csrf-protection.groovy /var/lib/jenkins/init.groovy.d/csrf-protection.groovy
+#mv /tmp/disable-jnlp.groovy /var/lib/jenkins/init.groovy.d/disable-jnlp.groovy
+#mv /tmp/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.UpgradeWizard.state
+#mv /tmp/node-agent.groovy /var/lib/jenkins/init.groovy.d/node-agent.groovy
+#chown -R jenkins:jenkins /var/lib/jenkins/jenkins.install.UpgradeWizard.state
+#mv /tmp/jenkins /etc/sysconfig/jenkins
+#chmod +x /tmp/install-plugins.sh
+#bash /tmp/install-plugins.sh
 
 echo 'JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"' >> /etc/sysconfig/jenkins
 
@@ -45,5 +40,14 @@ echo "Start Jenkins"
 service jenkins start
 
 echo "Install plugins & configure"
+sleep 20
 wget http://localhost:8080/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin Git
+java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin workflow-aggregator
+java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin pipeline-multibranch-defaults
+java -jar jenkins-cli.jar -s http://localhost:8080/ create-job /tmp/giveandtake.xml 
+
+service jenkins stop
+echo 'JENKINS_ARGS="--argumentsRealm.passwd.admin=p1a2s3s4 --argumentsRealm.roles.admin=admin"' >> /etc/sysconfig/jenkins
+cp /tmp/config.xml /var/lib/jenkins/
+service jenkins start

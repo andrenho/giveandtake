@@ -97,6 +97,16 @@ resource "aws_instance" "jenkins" {
         destination = "/tmp/setup_jenkins_aws.sh"
     }
 
+    provisioner "file" {
+        source      = "giveandtake.xml"
+        destination = "/tmp/giveandtake.xml"
+    }
+
+    provisioner "file" {
+        source      = "config.xml"
+        destination = "/tmp/config.xml"
+    }
+
     provisioner "remote-exec" {
         inline = [
             "sudo chmod +x /tmp/setup_jenkins_aws.sh",
