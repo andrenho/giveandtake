@@ -1,3 +1,16 @@
+== CI/CD
+
+- create local Jenkins
+- store Jenkins data on git
+- configure local Jenkins
+- on AWS:
+  - create Jenkins instance on ECS
+  - create domain
+  - create subdomain
+  - add certificate
+- do everything on Terraform
+- point Github repository to Jenkins
+
 == Backend: Java / Spring
 
 - define data structure (ok)
