@@ -27,21 +27,10 @@ chkconfig jenkins on
 echo "Install git"
 yum install -y git
 
-echo "Install npm"
-curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
-yum install -y nodejs --enablerepo=nodesource
-npm install -g create-react-app
-npm install -g bootstrap
-
-echo "Install gradle"
-gradle_version=5.2
-wget -c http://services.gradle.org/distributions/gradle-${gradle_version}-all.zip
-unzip  gradle-${gradle_version}-all.zip -d /opt
-ln -s /opt/gradle-${gradle_version} /opt/gradle
-printf "export GRADLE_HOME=/opt/gradle\nexport PATH=\$PATH:\$GRADLE_HOME/bin\n" > /etc/profile.d/gradle.sh
-source /etc/profile.d/gradle.sh
-# check installation
-gradle -v
+echo "Install Docker engine"
+yum install docker -y
+usermod -aG docker ec2-user
+service docker start
 
 echo "Configure Jenkins"
 echo 'JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"' >> /etc/sysconfig/jenkins
