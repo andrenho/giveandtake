@@ -7,14 +7,15 @@ pipeline {
     }
 
     environment {
-        CI  = true
+        CI               = true
+        npm_config_cache = npm-cache
     }
 
     stages {
 
         stage('Build frontend') {
             steps {
-                sh 'cd frontend && npm --unsafe-perm=true --allow-root install'
+                sh 'cd frontend && npm install'
                 echo 'Build not implemented.'
             }
         }
