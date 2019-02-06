@@ -2,6 +2,7 @@
 
 - on AWS:
   - create Jenkins instance on ECS (ok)
+  - manual Jenkins password
   - create domain (do on Terraform)
   - create subdomain (do on Terraform)
 - point Github repository to Jenkins
