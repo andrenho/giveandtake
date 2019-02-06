@@ -6,11 +6,11 @@ Steps to build for your environment:
 
 1. Register a new domain (suggestion: [Freenom](https://freenom.com/) has free domains)
 1. Register a new account on AWS
-  1. On the AWS console, create a new user (IAM > Users > Add user)
-    1. On the "Set permissions" screen, mark the "AdministratorAccess" checkbox.
-  1. Go to the created user (IAM > Users > name of the user), go to "Security credentials" and click in
+  - On the AWS console, create a new user (IAM > Users > Add user)
+    - On the "Set permissions" screen, mark the "AdministratorAccess" checkbox.
+  - Go to the created user (IAM > Users > name of the user), go to "Security credentials" and click in
      "Create access key"
-    1. Click on "Show" and take note of the "Access key ID" and "Secret access key". This is the only
+    - Click on "Show" and take note of the "Access key ID" and "Secret access key". This is the only
      oportunty you will have to see this information.
 1. Fork the [main Github repository](https://github.com/andrenho/giveandtake)
 1. Clone the repository
