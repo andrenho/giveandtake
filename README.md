@@ -26,9 +26,11 @@ Steps to build for your environment:
 
 - Run the following commands:
 
-	cd dns
-	terraform init`
-	terraform apply -var "access_key=MY_ACCESS_KEY" -var "secret-key=MY_SECRET_KEY"`
+```sh
+cd dns
+terraform init
+terraform apply -var "access_key=MY_ACCESS_KEY" -var "secret-key=MY_SECRET_KEY"
+```
 
 (replace `MY_ACCESS_KEY` and `MY_SECRET_KEY` with the key pair you got from AWS earlier)
 
@@ -39,8 +41,10 @@ Steps to build for your environment:
 
 - Run the following commands:
 
-	cd jenkins
-	./create_jenkins.sh MY_ACCESS_KEY MY_SECRET_KEY JENKINS_PASSWORD
+```sh
+cd jenkins
+./create_jenkins.sh MY_ACCESS_KEY MY_SECRET_KEY JENKINS_PASSWORD
+```
 
 (`JENKINS_PASSWORD` can be anything you want)
 
