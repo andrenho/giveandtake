@@ -14,7 +14,7 @@ pipeline {
 
         stage('Build frontend') {
             steps {
-                sh 'cd frontend && npm install'
+                sh 'cd frontend && npm --unsafe-perm=true --allow-root install'
                 echo 'Build not implemented.'
             }
         }
