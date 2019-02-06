@@ -9,6 +9,7 @@ pipeline {
 
         stage('Build') {
             steps {
+                sh 'cd frontend && npm install'
                 echo 'Build not implemented.'
             }
         }
