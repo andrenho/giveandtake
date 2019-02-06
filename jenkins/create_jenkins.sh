@@ -24,7 +24,7 @@ fi
 #
 
 terraform init
-terraform apply -var "access_key=$1" -var "secret_key=$2"
+terraform apply $3 -var "access_key=$1" -var "secret_key=$2"
 
 echo
 echo "Connect to ssh with: ssh -i jenkins_aws.pem ec2-user@`cat public_ip.txt`"

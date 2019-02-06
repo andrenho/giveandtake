@@ -63,8 +63,8 @@ resource "aws_instance" "jenkins" {
     provisioner "remote-exec" {
         inline 		= [
             "sudo chmod +x /tmp/setup_jenkins_aws.sh",
-            "sudo sed -i 's,DISPLAY_NAME,${var.jenkins_job_name},g' /tmp/setup_jenkins_aws.sh",
-            "sudo sed -i 's,GIT_REPO,${var.git_repo},g' /tmp/setup_jenkins_aws.sh",
+            "sudo sed -i 's,DISPLAY_NAME,${var.jenkins_job_name},g' /tmp/mainjob.xml",
+            "sudo sed -i 's,GIT_REPO,${var.git_repo},g' /tmp/mainjob.xml",
             "sudo /tmp/setup_jenkins_aws.sh",
         ]
     }
