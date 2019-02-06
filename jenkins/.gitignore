@@ -3,3 +3,4 @@
 .terraform
 *.lock.*
 public_ip.txt
+jenkins_aws.*

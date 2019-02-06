@@ -1,14 +1,9 @@
 == CI/CD
 
-- create local Jenkins
-- store Jenkins data on git
-- configure local Jenkins
 - on AWS:
-  - create Jenkins instance on ECS
-  - create domain
-  - create subdomain
-  - add certificate
-- do everything on Terraform
+  - create Jenkins instance on ECS (ok)
+  - create domain (do on Terraform)
+  - create subdomain (do on Terraform)
 - point Github repository to Jenkins
 
 == Backend: Java / Spring

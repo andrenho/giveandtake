@@ -1,5 +1,9 @@
 #!/bin/sh
 
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+echo "Update packages"
 yum update -y
 
 echo "Add swap"
@@ -10,9 +14,11 @@ swapon /swapfile
 swapon -s
 echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 
-echo "Install Jenkins stable release"
+echo "Install Java"
 yum remove -y java
 yum install -y java-1.8.0-openjdk
+
+echo "Install Jenkins stable release"
 wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 yum install -y jenkins
@@ -21,32 +27,39 @@ chkconfig jenkins on
 echo "Install git"
 yum install -y git
 
-echo "Configure Jenkins"
-#mkdir -p /var/lib/jenkins/init.groovy.d
-#mv /tmp/basic-security.groovy /var/lib/jenkins/init.groovy.d/basic-security.groovy
-#mv /tmp/disable-cli.groovy /var/lib/jenkins/init.groovy.d/disable-cli.groovy
-#mv /tmp/csrf-protection.groovy /var/lib/jenkins/init.groovy.d/csrf-protection.groovy
-#mv /tmp/disable-jnlp.groovy /var/lib/jenkins/init.groovy.d/disable-jnlp.groovy
-#mv /tmp/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.UpgradeWizard.state
-#mv /tmp/node-agent.groovy /var/lib/jenkins/init.groovy.d/node-agent.groovy
-#chown -R jenkins:jenkins /var/lib/jenkins/jenkins.install.UpgradeWizard.state
-#mv /tmp/jenkins /etc/sysconfig/jenkins
-#chmod +x /tmp/install-plugins.sh
-#bash /tmp/install-plugins.sh
+echo "Install npm"
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
+. ~/.nvm/nvm.sh
+nvm install 4.4.5
 
+echo "Install gradle"
+gradle_version=5.2
+wget -c http://services.gradle.org/distributions/gradle-${gradle_version}-all.zip
+unzip  gradle-${gradle_version}-all.zip -d /opt
+ln -s /opt/gradle-${gradle_version} /opt/gradle
+printf "export GRADLE_HOME=/opt/gradle\nexport PATH=\$PATH:\$GRADLE_HOME/bin\n" > /etc/profile.d/gradle.sh
+source /etc/profile.d/gradle.sh
+# check installation
+gradle -v
+
+echo "Configure Jenkins"
 echo 'JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"' >> /etc/sysconfig/jenkins
 
 echo "Start Jenkins"
 service jenkins start
+sleep 20
 
 echo "Install plugins & configure"
-sleep 20
 wget http://localhost:8080/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin Git
 java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin workflow-aggregator
 java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin pipeline-multibranch-defaults
 java -jar jenkins-cli.jar -s http://localhost:8080/ create-job giveandtake < /tmp/giveandtake.xml 
+service jenkins restart
+sleep 20
+java -jar jenkins-cli.jar -s http://localhost:8080/ build -s giveandtake
 
+echo "Configure jenkins security"
 service jenkins stop
 echo 'JENKINS_ARGS="--argumentsRealm.passwd.admin=p1a2s3s4 --argumentsRealm.roles.admin=admin"' >> /etc/sysconfig/jenkins
 cp /tmp/config.xml /var/lib/jenkins/
