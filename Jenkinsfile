@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        CI  = true
+    }
+
     stages {
 
         stage('Build') {
@@ -11,6 +15,7 @@ pipeline {
 
         stage('Test') {
             steps {
+                sh 'cd frontend && 
                 echo 'Test not implemented.'
             }
         }

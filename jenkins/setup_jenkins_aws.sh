@@ -29,7 +29,7 @@ yum install -y git
 
 echo "Install npm"
 curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
-yum install nodejs --enablerepo=nodesource
+yum install -y nodejs --enablerepo=nodesource
 npm install -g create-react-app
 npm install -g bootstrap
 
