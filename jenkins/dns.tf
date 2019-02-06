@@ -1,13 +1,13 @@
 resource "aws_route53_zone" "primary" {
-    name 			= "give-and-take.tk"
+    name 			= "${var.domain}"
 }
 
 resource "aws_route53_record" "jenkins-dns" {
 	zone_id 		= "${aws_route53_zone.primary.zone_id}"
-	name			= "jenkins.give-and-take.tk"
+	name			= "jenkins.${var.domain}"
 	type			= "A"
 	ttl				= "300"
-	records			= ["${aws_eip.jenkins_eip.public_ip"]
+	records			= ["${aws_eip.jenkins_eip.public_ip}"]
 }
 
 # vim:ts=4:sw=4:sts=4:expandtab:syntax=conf

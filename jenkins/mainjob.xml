@@ -2,7 +2,7 @@
 <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject plugin="workflow-multibranch@2.20">
   <actions/>
   <description></description>
-  <displayName>Give &amp; Take</displayName>
+  <displayName>DISPLAY_NAME</displayName>
   <properties>
     <org.jenkinsci.plugins.pipeline.modeldefinition.config.FolderConfig plugin="pipeline-model-definition@1.3.4.1">
       <dockerLabel></dockerLabel>
@@ -32,7 +32,7 @@
       <jenkins.branch.BranchSource>
         <source class="jenkins.plugins.git.GitSCMSource" plugin="git@4.0.0-rc">
           <id>1d440556-4ac2-4838-857c-40719ba1e7dc</id>
-          <remote>https://github.com/andrenho/giveandtake.git</remote>
+	  <remote>GIT_REPO</remote>
           <credentialsId></credentialsId>
           <traits>
             <jenkins.plugins.git.traits.BranchDiscoveryTrait/>

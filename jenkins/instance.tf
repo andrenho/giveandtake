@@ -51,8 +51,8 @@ resource "aws_instance" "jenkins" {
     }
 
     provisioner "file" {
-        source      = "giveandtake.xml"
-        destination = "/tmp/giveandtake.xml"
+        source      = "mainjob.xml"
+        destination = "/tmp/mainjob.xml"
     }
 
     provisioner "file" {
@@ -63,6 +63,8 @@ resource "aws_instance" "jenkins" {
     provisioner "remote-exec" {
         inline 		= [
             "sudo chmod +x /tmp/setup_jenkins_aws.sh",
+            "sudo sed -i 's,DISPLAY_NAME,${var.jenkins_job_name},g' /tmp/setup_jenkins_aws.sh",
+            "sudo sed -i 's,GIT_REPO,${var.git_repo},g' /tmp/setup_jenkins_aws.sh",
             "sudo /tmp/setup_jenkins_aws.sh",
         ]
     }
