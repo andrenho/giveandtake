@@ -28,9 +28,10 @@ echo "Install git"
 yum install -y git
 
 echo "Install npm"
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
-. ~/.nvm/nvm.sh
-nvm install 4.4.5
+curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
+yum install nodejs --enablerepo=nodesource
+npm install -g create-react-app
+npm install -g bootstrap
 
 echo "Install gradle"
 gradle_version=5.2
