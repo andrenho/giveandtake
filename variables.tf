@@ -2,6 +2,8 @@ variable "access_key" {}
 
 variable "secret_key" {}
 
+variable "jenkins_password" {}
+
 variable "region" {
     default = "us-east-1"
 }

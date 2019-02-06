@@ -54,13 +54,13 @@ wget http://localhost:8080/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin Git
 java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin workflow-aggregator
 java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin pipeline-multibranch-defaults
-java -jar jenkins-cli.jar -s http://localhost:8080/ create-job website < /tmp/mainjob.xml 
 service jenkins restart
 sleep 20
-java -jar jenkins-cli.jar -s http://localhost:8080/ build -s website
+java -jar jenkins-cli.jar -s http://localhost:8080/ create-job website < /tmp/mainjob.xml 
+sleep 5
 
 echo "Configure jenkins security"
 service jenkins stop
-echo 'JENKINS_ARGS="--argumentsRealm.passwd.admin=p1a2s3s4 --argumentsRealm.roles.admin=admin"' >> /etc/sysconfig/jenkins
+echo 'JENKINS_ARGS="--argumentsRealm.passwd.admin=JENKINS_PASSWORD --argumentsRealm.roles.admin=admin"' >> /etc/sysconfig/jenkins
 cp /tmp/config.xml /var/lib/jenkins/
 service jenkins start
