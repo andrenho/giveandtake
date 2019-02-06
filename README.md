@@ -2,7 +2,7 @@
 
 Steps to build for your environment:
 
-= Preparation
+= Preparation =
 
 1. Register a new domain (suggestion: [Freenom](https://freenom.com/) has free domains)
 1. Register a new account on AWS
@@ -15,14 +15,14 @@ Steps to build for your environment:
 1. Fork the [main Github repository](https://github.com/andrenho/giveandtake)
 1. Clone the repository
 
-= Configuration
+= Configuration =
 
 1. Edit the file `variables.tf` and change the following keys:
   - `domain`: with the domain name you created
   - `jenkins_job_name`: the name you want to give the job on Jenkins (it can be anything)
   - `git_repo`: the name of the forked repository.
 
-= Create DNS entry on AWS
+= Create DNS entry on AWS =
 
 1. Run the following commands:
 
@@ -35,7 +35,7 @@ Steps to build for your environment:
 1. The "apply" command should output a list of nameservers.
 1. Go to where you registered your domain, and set the outputed nameservers there.
 
-= Create Jenkins
+= Create Jenkins =
 
 1. Run the following commands:
 
@@ -52,6 +52,6 @@ Steps to build for your environment:
 1. Click on the only job, and then on "Scan Multibranch Pipeline Now". This will make Jenkins identify
    the branches on the Github repository, and build them.
 
-= Access website
+= Access website =
 
 1. After the build, the website should be available at https://www.my-domain.com/ .
