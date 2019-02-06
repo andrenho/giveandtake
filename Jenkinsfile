@@ -7,28 +7,28 @@ pipeline {
 
     stages {
 
-        stage('Build') {
+        stage('Build frontend') {
             steps {
                 sh 'cd frontend && npm install'
                 echo 'Build not implemented.'
             }
         }
 
-        stage('Test') {
+        stage('Test frontend') {
             steps {
                 sh 'cd frontend && npm test'
                 echo 'Test not implemented.'
             }
         }
 
-        stage('Deploy devl') {
+        stage('Deploy frontend devl') {
             when { branch 'devl' }
             steps {
                 echo 'Deploy not implemented.'
             }
         }
 
-        stage('Deploy master') {
+        stage('Deploy frontend master') {
             when { branch 'master' }
             steps {
                 echo 'Deploy not implemented.'
