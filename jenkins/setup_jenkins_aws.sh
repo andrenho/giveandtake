@@ -30,7 +30,9 @@ yum install -y git
 echo "Install Docker engine"
 yum install docker -y
 usermod -aG docker ec2-user
+usermod -aG docker jenkins
 service docker start
+chkconfig docker on
 
 echo "Configure Jenkins"
 echo 'JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"' >> /etc/sysconfig/jenkins
