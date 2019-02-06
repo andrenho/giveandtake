@@ -15,7 +15,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'cd frontend && 
+                sh 'cd frontend && npm test'
                 echo 'Test not implemented.'
             }
         }
