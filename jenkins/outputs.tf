@@ -1,3 +1,7 @@
+output "external-dns" {
+    value = "${join(",", aws_route53_zone.primary.name_servers.*)}"
+}
+
 output "jenkins-ip" {
     value = "${aws_eip.jenkins_eip.public_ip}"
 }

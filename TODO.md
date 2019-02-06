@@ -6,6 +6,10 @@
   - create domain (do on Terraform)
   - create subdomain (do on Terraform)
 - point Github repository to Jenkins
+- relativize:
+  - key / secret
+  - github repository
+  - domain
 
 == Backend: Java / Spring
 

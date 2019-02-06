@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# see https://read.acloud.guru/deploy-a-jenkins-cluster-on-aws-35dcf66a1eca
-
 if [ "$#" -ne 2 ]; then
     echo "Usage: $0 ACCESS_KEY SECRET_KEY"
     exit 1
